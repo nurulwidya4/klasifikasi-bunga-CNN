@@ -14,8 +14,8 @@ Dataset terdiri dari 9 kelas bunga, namun dalam proyek ini hanya digunakan 4 kel
 
 Dataset ini:
 - Disimpan di Google Drive dan dipanggil di Colab
-- # Path dataset di Google Drive
-dataset_path = '/content/drive/MyDrive/Colab Notebooks/dataset_bunga/flowers'
+ # Path dataset di Google Drive
+- dataset_path = '/content/drive/MyDrive/Colab Notebooks/dataset_bunga/flowers'
 - Dipisahkan ke dalam: training, validasi, dan testing
 - Telah melalui proses augmentasi dan normalisasi menggunakan `ImageDataGenerator`
 
@@ -95,6 +95,9 @@ Program Studi Teknik Komputer
 Universitas Muhammadiyah Karanganyar – 2025
 
 ---
+📄 Untuk melihat isi notebook secara visual, buka melalui Google Colab:
+[Klik untuk buka di Google Colab](https://colab.research.google.com/github/nurulwidya4/klasifikasi-bunga-CNN/blob/main/klasifikasi_bunga_CNN.ipynb)
+
 
 ## 💡 Catatan
 
