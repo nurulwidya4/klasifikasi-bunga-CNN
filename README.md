@@ -14,6 +14,8 @@ Dataset terdiri dari 9 kelas bunga, namun dalam proyek ini hanya digunakan 4 kel
 
 Dataset ini:
 - Disimpan di Google Drive dan dipanggil di Colab
+- # Path dataset di Google Drive
+dataset_path = '/content/drive/MyDrive/Colab Notebooks/dataset_bunga/flowers'
 - Dipisahkan ke dalam: training, validasi, dan testing
 - Telah melalui proses augmentasi dan normalisasi menggunakan `ImageDataGenerator`
 
