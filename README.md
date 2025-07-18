@@ -1,62 +1,60 @@
 # 🌸 Klasifikasi Gambar Bunga Menggunakan CNN
 
-Proyek ini merupakan bagian dari tugas akhir mata kuliah *Computer Vision* yang bertujuan untuk mengklasifikasikan gambar bunga ke dalam empat kelas: **Daffodil, Iris, Rose, dan Tulip**, menggunakan model **Convolutional Neural Network (CNN)**. Dataset awal terdiri dari 9 kelas bunga, namun hanya 4 kelas yang dipilih dan diseimbangkan ulang menggunakan teknik sampling `replace=True`.
+Proyek ini merupakan bagian dari tugas akhir mata kuliah *Computer Vision* yang bertujuan untuk mengklasifikasikan gambar bunga ke dalam empat kelas: **Daffodil, Iris, Rose, dan Tulip**, menggunakan model **Convolutional Neural Network (CNN)**.
 
 ---
 
 ## 📁 Dataset
 
-Dataset berasal dari sumber open dataset, disimpan dalam direktori lokal `dataset_fix/` dan memiliki struktur:
-
-Kelas yang digunakan:
+Dataset terdiri dari 9 kelas bunga, namun dalam proyek ini hanya digunakan 4 kelas:
 - `daffodil`
 - `iris`
 - `rose`
 - `tulip`
 
-Jumlah gambar per kelas:
-- Train: 700 gambar
-- Val: 140 gambar
-- Test: 140 gambar
-
-Proses tambahan:
-- Seleksi kelas
-- Sampling berimbang dengan `replace=True`
-- Augmentasi & normalisasi menggunakan `ImageDataGenerator`
+Dataset ini:
+- Disimpan di Google Drive dan dipanggil di Colab
+- Dipisahkan ke dalam: training, validasi, dan testing
+- Telah melalui proses augmentasi dan normalisasi menggunakan `ImageDataGenerator`
 
 ---
 
 ## 🧠 Arsitektur CNN
 
-Model CNN dibangun menggunakan `TensorFlow` dan `Keras` dengan struktur sebagai berikut:
+Model CNN dibangun menggunakan `TensorFlow` dan `Keras` dengan arsitektur:
 
-| Layer             | Output Shape         | Param   |
-|-------------------|----------------------|---------|
-| Conv2D (32, 3x3)  | (128, 128, 32)       | 896     |
-| MaxPooling2D      | (64, 64, 32)         | 0       |
-| Conv2D (64, 3x3)  | (64, 64, 64)         | 18,496  |
-| MaxPooling2D      | (32, 32, 64)         | 0       |
-| Flatten           | -                    | 0       |
-| Dense (128)       | -                    | 262,272 |
-| Dropout (0.5)     | -                    | 0       |
-| Dense (4, softmax)| -                    | 516     |
-
-**Total parameter:** ±282.000  
-**Optimizer:** Adam  
-**Loss Function:** Categorical Crossentropy
+| Layer             | Output Shape      | Keterangan              |
+|------------------|-------------------|-------------------------|
+| Conv2D (64,3x3)   | (128, 128, 64)    | Ekstraksi fitur awal    |
+| MaxPooling2D      | (64, 64, 64)      | Reduksi dimensi         |
+| Conv2D (64,3x3)   | (64, 64, 64)      | Fitur lanjutan          |
+| MaxPooling2D      | (32, 32, 64)      | Reduksi dimensi         |
+| Dropout (0.3)     | -                 | Regularisasi            |
+| Flatten           | -                 | Vektor fitur            |
+| Dense (512, ReLU) | -                 | Fully connected layer   |
+| Dense (4, Softmax)| -                 | Keluaran klasifikasi    |
 
 ---
 
-## 📊 Hasil dan Evaluasi
+## 🧪 Hasil Pelatihan
 
-| Metrik              | Nilai         |
-|---------------------|---------------|
-| Akurasi Validasi    | ± 82–88%      |
-| Confusion Matrix    | ✅ Ya         |
-| Classification Report | ✅ Ya       |
-| Akurasi Tertinggi   | Epoch ke-10   |
+Model dilatih selama 20 epoch dan menggunakan:
+- **EarlyStopping** dan **ModelCheckpoint**
+- **Augmentasi gambar** untuk menghindari overfitting
 
-Model menunjukkan performa yang baik dalam membedakan empat kelas bunga berdasarkan hasil evaluasi menggunakan confusion matrix dan classification report.
+📊 **Akurasi Validasi Akhir:** 100%  
+📉 **Loss Validasi Terakhir:** 0.006  
+✅ **Akurasi Data Uji:** 100%
+
+Confusion Matrix dan Classification Report menunjukkan bahwa semua gambar di data uji berhasil diklasifikasikan dengan benar tanpa kesalahan.
+
+---
+
+## 📊 Visualisasi Hasil
+
+- Akurasi dan loss divisualisasikan menggunakan Matplotlib
+- Confusion matrix divisualisasikan dengan Seaborn
+- 9 contoh gambar hasil prediksi ditampilkan dengan label aslinya dan prediksi
 
 ---
 
@@ -65,18 +63,38 @@ Model menunjukkan performa yang baik dalam membedakan empat kelas bunga berdasar
 - Python
 - Google Colab
 - TensorFlow & Keras
-- NumPy & Pandas
 - Matplotlib & Seaborn
 - Scikit-learn
+- Pandas, NumPy
 
 ---
 
-## 📌 Cara Menjalankan
+## 🚀 Cara Menjalankan
 
-1. Buka file notebook `klasifikasi_bunga_CNN.ipynb` di [Google Colab](https://colab.research.google.com)
-2. Upload folder `dataset_fix` ke Google Drive
-3. Gunakan kode:
-   ```python
-   from google.colab import drive
-   drive.mount('/content/drive')
+1. Buka file notebook di [Google Colab](https://colab.research.google.com)
+2. Mount Google Drive tempat menyimpan dataset
+3. Jalankan semua cell dari atas ke bawah
+4. Lihat hasil pelatihan, evaluasi, dan prediksi visual
 
+---
+
+## 📄 Manual Book
+
+Dokumentasi lengkap tersedia dalam file `MANUAL BOOK.docx`  
+Berisi latar belakang, teori, implementasi, hasil, pembahasan, dan kesimpulan proyek ini.
+
+---
+
+## 👩‍💻 Disusun oleh
+
+**Siti Nurul Widyaningsih**  
+NIM: TK0122013  
+Program Studi Teknik Komputer  
+Universitas Muhammadiyah Karanganyar – 2025
+
+---
+
+## 💡 Catatan
+
+- Model ini dapat dikembangkan untuk mendeteksi lebih banyak jenis bunga (hingga 9 kelas)
+- Bisa dideploy ke web-app dengan Flask atau Streamlit untuk klasifikasi gambar secara interaktif
